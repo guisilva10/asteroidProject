@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+}
+
+ul li{
+    margin-left: 20px;
+}
+
+.animacaoli {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    transition-duration: 1s;
+
+}
+@media (max-width: 991px) {
+    .navbar-expand-lg .navbar-collapse {
+        text-align: center;
+        flex-basis: auto;
+        display: flex;
+        margin-top: 2px;
+    }
+    nav > div > div {
+        display: block;
+    }
+}

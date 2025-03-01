@@ -1,0 +1,10 @@
+#detalhes_div{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    text-decoration: none;
+}
+
+#detalhes_div ul {
+    list-style-type: none
+}
