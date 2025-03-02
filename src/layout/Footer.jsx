@@ -1,16 +1,16 @@
-import React from 'react'
-
+import React from "react";
 
 const Footer = () => {
-    return (<>
-        <div style={{bottom:'0', width:'100%', position: 'fixed'}}>
-            <footer >
-                <div style={{display:'flex',background:'rgba(0,0,0,0.1)' }} >
-                    <small style={{margin: '0 auto'}}>Copyright &copy; Thiago Silva </small>
-                </div>
-            </footer>
-        </div>
-    </>)
-}
+  return (
+    <footer className="fixed right-0 bottom-0 left-0 bg-gray-900 py-2 text-white">
+      <div className="container mx-auto flex flex-col items-center">
+        <p className="text-sm">
+          &copy; {new Date().getFullYear()} Thiago Silva. Todos os direitos
+          reservados.
+        </p>
+      </div>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

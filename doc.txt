@@ -1,0 +1,100 @@
+Instalação e Configuração
+
+1. Instalação do Vite
+
+Se o projeto ainda não foi criado, utilize o seguinte comando para criar um novo projeto com Vite:
+
+npm create vite@latest meu-projeto --template react
+cd meu-projeto
+npm install
+
+2. Instalação do Tailwind CSS
+
+npm install tailwindcss @tailwindcss/vite
+npx tailwindcss init -p
+
+Edite o arquivo vite.config.js e adicione os caminhos corretos:
+
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+export default defineConfig({
+plugins: [tailwindcss()],
+});
+
+Adicione Tailwind ao seu arquivo globals.css:
+
+@import "tailwindcss";
+
+3. Instalação do Prettier e Plugin do Tailwind
+
+npm install -D prettier prettier-plugin-tailwindcss
+
+Crie o arquivo .prettierrc:
+
+{
+"plugins": ["prettier-plugin-tailwindcss"]
+}
+
+Atualizações nos Componentes
+
+Navbar
+
+Foi melhorada para um design responsivo utilizando Tailwind CSS.
+
+Footer
+
+Agora tem um design mais moderno, com uma melhor distribuição dos elementos.
+
+LoadingHome
+
+Agora exibe um ícone de foguete animado com lucide-react:
+
+npm install lucide-react
+
+Código atualizado:
+
+import { Rocket } from "lucide-react";
+
+const LoadingHome = () => {
+return (
+
+
+
+);
+};
+
+export default LoadingHome;
+
+Página "Sobre Mim"
+
+Melhorada para melhor legibilidade e responsividade.
+
+Página "Detalhes do Asteroide"
+
+Agora possui um design mais organizado e limpo, melhorando a exibição dos dados.
+
+Página "Não Encontrada"
+
+Agora exibe uma mensagem mais amigável e um botão estilizado para voltar à página inicial:
+
+import img from "../assets/duvida.png";
+import { Link } from "react-router-dom";
+
+const NaoEncontrada = () => {
+return (
+
+
+
+Página Não Encontrada
+
+
+Oops! Parece que essa página não existe.
+
+
+Voltar para Home
+
+
+);
+};
+
+export default NaoEncontrada;

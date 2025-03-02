@@ -1,26 +1,26 @@
-import React from 'react'
-import '../style/Nav.css'
-import { Link } from 'react-router-dom'
-import img from '../assets/foguete.png'
+import React from "react";
+import { Link } from "react-router-dom";
+import img from "../assets/foguete.png";
 
 const Nav = () => {
-    return (<>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary" >
-            <div className="container-fluid">
-                <img src={img} alt="" width='70px' />
-                <div className="collapse navbar-collapse navbarText" >
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item  ">
-                            <Link className="nav-link animacaoli" to={'/'}>Home</Link>
-                        </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link animacaoli" to={'/sobre-mim'}>Sobre Mim</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </>)
-}
+  return (
+    <nav className="sticky top-0 right-0 left-0 bg-gray-900 p-4 shadow-lg">
+      <div className="container mx-auto flex items-center justify-between">
+        <img src={img} alt="Logo" className="w-16" />
+        <div className="flex space-x-6">
+          <Link className="text-white transition hover:text-gray-400" to={"/"}>
+            Home
+          </Link>
+          <Link
+            className="text-white transition hover:text-gray-400"
+            to={"/sobre-mim"}
+          >
+            Sobre Mim
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+};
 
-export default Nav
+export default Nav;

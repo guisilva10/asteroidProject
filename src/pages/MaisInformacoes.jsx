@@ -1,44 +1,77 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useParams, Link } from "react-router-dom"
-import axios from 'axios'
-import '../style/MaisInformacoes.css'
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const DetalheAsteroide = () => {
-  const { id } = useParams()
-  const [asteroide, setAsteroide] = useState(null)
+  const { id } = useParams();
+  const [asteroide, setAsteroide] = useState(null);
 
-  const requisicao = async () => {
-    const asteroideConsulta = await axios.get(
-      `https://api.nasa.gov/neo/rest/v1/neo/${id}?api_key=QWRE3ULoOtEeoaXwFMb1WDwWrY4Muv7NncJFWWsn`
-    )
-    setAsteroide(asteroideConsulta.data)
-
-  }
   useEffect(() => {
-    requisicao()
-  }, [])
+    const requisicao = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.nasa.gov/neo/rest/v1/neo/${id}?api_key=QWRE3ULoOtEeoaXwFMb1WDwWrY4Muv7NncJFWWsn`,
+        );
+        setAsteroide(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar dados do asteroide", error);
+      }
+    };
+    requisicao();
+  }, [id]);
 
+  if (!asteroide) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <span className="text-lg font-semibold text-gray-600">
+          Carregando...
+        </span>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div id='detalhes_div'>
-        <h1>Detalhes do asteroide</h1>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">{asteroide?.name}</h5>
-            <h6>É potencialmente perigoso?<br />{asteroide?.is_potentially_hazardous_asteroid ? 'Sim' : 'Não'}</h6>
-            <h6>Diâmetro Máximo<br />{asteroide?.estimated_diameter.kilometers.estimated_diameter_max}</h6>
-            <h6>Velocidade relativa(Hora)<br />{asteroide?.close_approach_data?.[0]?.relative_velocity?.kilometers_per_hour}</h6>
-            <h6>Magnitude absoluta<br />{asteroide?.absolute_magnitude_h}</h6>
-            <a style={{border:'1px solid black', borderRadius:'10px', textDecoration:'none', color:'black', padding:'5px 10px', background:'rgba(211, 211, 211, 1)'}} href={asteroide?.nasa_jpl_url} target='_blank'>Mais Detalhes</a>
-          </div>
-        </div>
-      </div >
-    </>
-  )
-}
-
-
+    <div className="mx-auto mt-10 mb-10 h-full max-w-3xl rounded-lg bg-gray-900 p-6 text-white shadow-lg">
+      <h1 className="mb-6 text-center text-3xl font-bold">
+        Detalhes do Asteroide
+      </h1>
+      <div className="rounded-lg border border-gray-700 p-6">
+        <h2 className="mb-4 text-center text-2xl font-semibold">
+          {asteroide.name}
+        </h2>
+        <p className="mb-2">
+          <span className="font-bold">É potencialmente perigoso?</span>{" "}
+          {asteroide.is_potentially_hazardous_asteroid ? "Sim" : "Não"}
+        </p>
+        <p className="mb-2">
+          <span className="font-bold">Diâmetro Máximo:</span>{" "}
+          {asteroide.estimated_diameter.kilometers.estimated_diameter_max.toFixed(
+            2,
+          )}{" "}
+          km
+        </p>
+        <p className="mb-2">
+          <span className="font-bold">Velocidade Relativa (km/h):</span>{" "}
+          {parseFloat(
+            asteroide.close_approach_data?.[0]?.relative_velocity
+              ?.kilometers_per_hour,
+          ).toFixed(2)}
+        </p>
+        <p className="mb-4">
+          <span className="font-bold">Magnitude Absoluta:</span>{" "}
+          {asteroide.absolute_magnitude_h}
+        </p>
+        <a
+          href={asteroide.nasa_jpl_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block rounded-lg bg-blue-600 px-4 py-2 text-center text-white hover:bg-blue-700"
+        >
+          Mais Detalhes
+        </a>
+      </div>
+    </div>
+  );
+};
 
 export default DetalheAsteroide;
